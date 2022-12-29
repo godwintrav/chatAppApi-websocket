@@ -17,7 +17,7 @@ const serverlessConfiguration: AWS = {
       dev: 'serverlessUser',
       int: 'int-profile',
       prod: 'prod-profile',
-    }
+    },
 
     esbuild: {
       bundle: true,
@@ -35,7 +35,7 @@ const serverlessConfiguration: AWS = {
     name: 'aws',
     runtime: 'nodejs16.x',
     profile: '${self:custom.profile.${sls:stage}}',
-    region: 'eu-central-1',
+    region: 'eu-west-2',
     apiGateway: {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
@@ -44,6 +44,7 @@ const serverlessConfiguration: AWS = {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       singleTable: '${self:custom.tables.singleTable}',
       region: '${self:provider.region}',
+      COGNITO_POOL_ID: { Ref: 'CognitoUserPool' }
     },
     iamRoleStatements: [
       {
@@ -52,6 +53,7 @@ const serverlessConfiguration: AWS = {
         Resource: [
           'arn:aws:dynamodb:${self:provider.region}:${aws:accountId}:table/${self:custom.tables.singleTable}',
           'arn:aws:dynamodb:${self:provider.region}:${aws:accountId}:table/${self:custom.tables.singleTable}/index/index1',
+          'arn:aws:dynamodb:${self:provider.region}:${aws:accountId}:table/${self:custom.tables.singleTable}/index/index2',
         ],
       },
     ],
@@ -67,13 +69,13 @@ const serverlessConfiguration: AWS = {
       DynamoTableName: {
         Value: '${self:custom.tables.singleTable}',
         Export: {
-          Name: 'DynamoTableName',
+          Name: 'ChatAppDynamoTableName',
         },
       },
       UserPoolId: {
         Value: { Ref: 'CognitoUserPool' },
         Export: {
-          Name: 'UserPoolId',
+          Name: 'ChatAppUserPoolId',
         },
       },
     },
