@@ -47,6 +47,26 @@ const functions: AWS['functions'] = {
       },
     ],
   },
+  websocketCreateGroup: {
+    handler: 'src/functions/websocketCreateGroup/index.handler',
+    events: [
+      {
+        websocket: {
+          route: "createGroup"
+        }
+      },
+    ],
+  },
+  websocketGetMyGroups: {
+    handler: 'src/functions/websocketGetMyGroups/index.handler',
+    events: [
+      {
+        websocket: {
+          route: "listMyGroups"
+        }
+      },
+    ],
+  },
 };
 
 export default functions;
