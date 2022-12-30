@@ -28,3 +28,15 @@ export interface UserGroupRecord {
   userName: string;
   groupName: string;
 }
+
+export interface MessageRecord {
+  id: string;
+  pk: string; // groupId
+  sk: string; // message#${date}
+
+  groupId: string;
+  from: string;
+  fromId: string;
+  message: string;
+  date: number;
+}
