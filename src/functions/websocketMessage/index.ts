@@ -56,7 +56,7 @@ export const handler = async (event: APIGatewayProxyEvent) => {
     const dateNow = Date.now();
 
     const data: MessageRecord = {
-      id: uuid,
+      id: uuid(),
       pk: groupId,
       sk: `message#${dateNow}`,
 
@@ -67,7 +67,8 @@ export const handler = async (event: APIGatewayProxyEvent) => {
       date: dateNow
     }
 
-    await Dynamo.write({ data, tableName });
+    const response = await Dynamo.write({ data, tableName });
+    console.log(response);
 
     const groupUsers = await Dynamo.query<UserGroupRecord>({
       pkKey: 'pk',
@@ -106,7 +107,7 @@ export const handler = async (event: APIGatewayProxyEvent) => {
 
     await Promise.all(promiseArray);
 
-    formatJSONResponse({ body: {} });
+    return formatJSONResponse({ body: {} });
 
   } catch (error) {
     console.log(error);
