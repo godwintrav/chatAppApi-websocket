@@ -40,3 +40,13 @@ export interface MessageRecord {
   message: string;
   date: number;
 }
+
+export interface JoinGroupRequestRecord {
+  id: string;
+  pk: string;
+  sk: string;
+
+  userId: string;
+  groupId: string;
+  userName: string;
+}

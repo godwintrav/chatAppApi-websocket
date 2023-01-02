@@ -77,6 +77,16 @@ const functions: AWS['functions'] = {
       },
     ],
   },
+  websocketJoinGroup: {
+    handler: 'src/functions/websocketJoinGroup/index.handler',
+    events: [
+      {
+        websocket: {
+          route: "joinGroup"
+        }
+      },
+    ],
+  },
 };
 
 export default functions;
