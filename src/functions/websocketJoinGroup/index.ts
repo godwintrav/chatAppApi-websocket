@@ -39,7 +39,7 @@ export const handler = async (event: APIGatewayProxyEvent) => {
       tableName
     });
 
-    if (!groupId) {
+    if (!group) {
       await websocket.send({
         connectionId,
         domainName,
