@@ -115,6 +115,19 @@ const functions: AWS['functions'] = {
       },
     ],
   },
+  getMessageHistory: {
+    handler: 'src/functions/getMessageHistory/index.handler',
+    events: [
+      {
+        http: {
+          method: 'get',
+          path: 'messages/{groupId}',
+          cors: corsSettings,
+          authorizer
+        }
+      },
+    ],
+  },
 };
 
 export default functions;
