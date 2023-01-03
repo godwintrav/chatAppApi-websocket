@@ -87,6 +87,21 @@ const functions: AWS['functions'] = {
       },
     ],
   },
+  websocketHandleJoinRequest: {
+    handler: 'src/functions/websocketHandleJoinRequest/index.handler',
+    events: [
+      {
+        websocket: {
+          route: "acceptJoinRequest"
+        }
+      },
+      {
+        websocket: {
+          route: "rejectJoinRequest"
+        }
+      },
+    ],
+  },
   getGroupDetails: {
     handler: 'src/functions/getGroupDetails/index.handler',
     events: [
